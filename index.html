@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>Globe Test</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -26,6 +29,11 @@
         font-weight: 400;
         font-style: normal;
         font-variation-settings: "wdth" 100;
+      }
+      canvas {
+        touch-action: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
       }
     </style>
   </head>
@@ -189,6 +197,10 @@
       // scripts.js
       import * as THREE from "three";
       import { Country } from "https://cdn.jsdelivr.net/npm/country-state-city@3.2.1/+esm";
+      document.addEventListener("gesturestart", function (e) {
+        e.preventDefault();
+      });
+
       let data = {
         attackOrigins: [
           // Your attack origin data here
@@ -872,11 +884,11 @@
           .backgroundColor("#000000");
 
         globe.backgroundColor("#000000");
-        // const ambientLight = new THREE.AmbientLight(0xffffff, 0);
-        // globe.scene().add(ambientLight);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0);
+        globe.scene().add(ambientLight);
 
         fetchCountriesData();
-        const controls = globe.controls(); 
+        const controls = globe.controls();
 
         if (controls) {
           //disable zoom
