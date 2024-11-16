@@ -6,6 +6,8 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Globe Test</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -197,6 +199,7 @@
       // scripts.js
       import * as THREE from "three";
       import { Country } from "https://cdn.jsdelivr.net/npm/country-state-city@3.2.1/+esm";
+
       document.addEventListener("gesturestart", function (e) {
         e.preventDefault();
       });
@@ -886,6 +889,14 @@
         globe.backgroundColor("#000000");
         const ambientLight = new THREE.AmbientLight(0xffffff, 0);
         globe.scene().add(ambientLight);
+
+        window.addEventListener('load', () => {
+    setTimeout(() => {
+        window.scrollTo(0, 1);
+        // Trigger your render function here
+        globe.render();
+    }, 0);
+});
 
         fetchCountriesData();
         const controls = globe.controls();
