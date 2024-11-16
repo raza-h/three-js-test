@@ -32,7 +32,7 @@
 
   <body class="d-flex flex-column min-vh-100 w-screen overflow-x-hidden">
     <div
-      class="w-full relative text-white h-full bg-black overflow-x-scroll overflow-y-hidden md:!overflow-hidden left-0"
+      class="w-full relative text-white h-full bg-black overflow-x-hidden overflow-y-hidden md:!overflow-hidden left-0"
     >
       <div id="globeContainer" class="transform lg:translate-y-[-60px]"></div>
 
@@ -872,8 +872,8 @@
           .backgroundColor("#000000");
 
         globe.backgroundColor("#000000");
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0);
-        globe.scene().add(ambientLight);
+        // const ambientLight = new THREE.AmbientLight(0xffffff, 0);
+        // globe.scene().add(ambientLight);
 
         fetchCountriesData();
         const controls = globe.controls(); 
