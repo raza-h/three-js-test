@@ -6,8 +6,11 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
     <title>Globe Test</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -199,6 +202,29 @@
       // scripts.js
       import * as THREE from "three";
       import { Country } from "https://cdn.jsdelivr.net/npm/country-state-city@3.2.1/+esm";
+
+      // Create a canvas element programmatically
+      const canvas = document.createElement("canvas");
+      const globeContainerCanvas = document.getElementById("globeContainer");
+      globeContainerCanvas.appendChild(canvas);
+
+      // Set canvas size to match container
+      canvas.width = globeContainerCanvas.clientWidth;
+      canvas.height = globeContainerCanvas.clientHeight;
+
+      // Initialize WebGL context with iOS-friendly parameters
+      const gl = canvas.getContext("webgl", {
+        powerPreference: "high-performance",
+        antialias: true,
+        alpha: false,
+      });
+
+      // Handle resize events
+      window.addEventListener("resize", () => {
+        canvas.width = globeContainerCanvas.clientWidth;
+        canvas.height = globeContainerCanvas.clientHeight;
+        // Update your globe rendering here
+      });
 
       document.addEventListener("gesturestart", function (e) {
         e.preventDefault();
@@ -890,13 +916,13 @@
         const ambientLight = new THREE.AmbientLight(0xffffff, 0);
         globe.scene().add(ambientLight);
 
-        window.addEventListener('load', () => {
-    setTimeout(() => {
-        window.scrollTo(0, 1);
-        // Trigger your render function here
-        globe.render();
-    }, 0);
-});
+        window.addEventListener("load", () => {
+          setTimeout(() => {
+            window.scrollTo(0, 1);
+            // Trigger your render function here
+            globe.render();
+          }, 0);
+        });
 
         fetchCountriesData();
         const controls = globe.controls();
